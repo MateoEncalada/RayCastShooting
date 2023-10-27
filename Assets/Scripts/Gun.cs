@@ -12,6 +12,7 @@ public float range = 100f;
 public Camera fpsCam;
 public Transform laserOrigin;
 public float laserDuration = 0.05f;
+public int contDisparos =0;
 LineRenderer laserline;
 ContCubos conteo;
 ConteoEsferas conteoEsferas;
@@ -32,6 +33,7 @@ void Awake()
             Shoot();
         }
     }
+    //Queremos que valga .
 
     void Shoot ()
     {
@@ -46,16 +48,29 @@ void Awake()
             Target target = hit.transform.GetComponent<Target>();
             if (target != null)
             {
-                target.TakeDamage(damage);
-            } 
-            if (hit.transform.CompareTag("Cube"))
+                target.TakeDamage(damage); 
+                if (hit.transform.CompareTag("Cube"))
             {
-                conteo.CubosElim();
+                contDisparos++;
+
+                   if (contDisparos>= 2)
+                    { 
+                            conteo.CubosElim();
+                            contDisparos=0;
+                    }
             } 
             else if (hit.transform.CompareTag("Sphere")) 
             {
-                conteoEsferas.EsferaEliminada();
-            }         
+                contDisparos++;
+                if (contDisparos>= 3)
+                    { 
+                            conteoEsferas.EsferaEliminada();
+                            contDisparos=0;
+                    }
+            }             
+            } 
+            
+                     
         }
         else{
                 laserline.SetPosition(1, rayOrigin + (fpsCam.transform.forward * range));

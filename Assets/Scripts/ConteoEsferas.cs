@@ -11,6 +11,7 @@ public class ConteoEsferas : MonoBehaviour
      public void EsferaEliminada()
      {
         esferasEliminadas++;
+        Actualizar();
         
      }
      private void Actualizar()

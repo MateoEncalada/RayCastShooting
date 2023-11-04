@@ -10,6 +10,7 @@ public class ContCubos : MonoBehaviour
     public void CubosElim()
     {
         cubosElim++;
+        Actualizar();
     }
     private void Actualizar()
     {
